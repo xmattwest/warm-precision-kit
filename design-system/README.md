@@ -2,12 +2,12 @@
 
 **Make the important obvious, the complex understandable, and the next step clear.**
 
-A portable style kit for research, documents, diagrams, presentations and software. Ivory is its default visual profile. Version 1.0.
+A portable style kit for research, documents, diagrams, presentations and software. It ships with one visual profile, also called Warm Precision. Version 1.0.
 
 ## Start here
 
 1. Pick the document from the reader's goal in `DOCUMENTS.md` and start from its shape.
-2. Apply the profile in `profiles/ivory/` through the medium's adapter in `adapters/`.
+2. Apply the profile in `profiles/warm-precision/` through the medium's adapter in `adapters/`.
 3. Show numbers with `adapters/data.md`; write copy with `VOICE.md`.
 4. For consequential work, fill in `templates/ARTIFACT_BRIEF.md` first and `templates/REVIEW_RECEIPT.md` last.
 
@@ -25,7 +25,7 @@ While editing, `python3 design-system/scripts/build.py --embed-fonts --watch` re
 ## Authority and ownership
 
 - `PHILOSOPHY.md` owns the principles.
-- `profiles/ivory/tokens.json` owns exact colors, type, spacing, media sizes and number formats. Its `contract` owns contrast minimums and accent limits.
+- `profiles/warm-precision/tokens.json` owns exact colors, type, spacing, media sizes and number formats. Its `contract` owns contrast minimums and accent limits.
 - `VOICE.md` owns how copy sounds. `DOCUMENTS.md` owns which document to make and its default shape.
 - `../BRAND_KIT.md` explains the identity. Its marked tables are generated from the profile.
 - `adapters/` own medium-specific expression. `adapters/data.md` owns figures, tables and number formatting.
@@ -56,7 +56,7 @@ Use Impeccable for frontend craft and Diagram Design for publication diagrams wh
 - `PHILOSOPHY.md`: principles and decision rules.
 - `VOICE.md`: rules, registers, before-and-after edits and a pre-publish check.
 - `DOCUMENTS.md`: ten document types, chosen by goal, each with a default shape.
-- `profiles/ivory/`: tokens, integration notes, and how to make your own profile.
+- `profiles/warm-precision/`: tokens, integration notes, and how to make your own profile.
 - `adapters/`: web, documents, slides, diagrams, data, motion, and scenes (GSAP in pages, HyperFrames for video).
 - `patterns/`: cross-medium information structures.
 - `templates/`: project context, artifact brief, scene brief, agent pointer, review receipt.

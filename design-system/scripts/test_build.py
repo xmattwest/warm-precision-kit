@@ -112,6 +112,7 @@ class KitIntegrity(unittest.TestCase):
                 names = archive.namelist()
                 self.assertIn("design-system/PHILOSOPHY.md", names)
                 self.assertIn("BRAND_KIT.md", names)
+                self.assertIn("LICENSE", names)
                 for forbidden in ("examples/", "documents/", "tools/", "playbooks/"):
                     self.assertFalse(any(forbidden in name for name in names), forbidden)
                 archive.extractall(root / "clean-room")

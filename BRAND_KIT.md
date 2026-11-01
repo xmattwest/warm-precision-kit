@@ -1,10 +1,10 @@
 # Brand kit
 
-**The Ivory profile: a warm canvas, one serif display line, Inter for everything else, slate structure and one orange focus.**
+**The Warm Precision profile: a warm Ivory canvas, one serif display line, Inter for everything else, slate structure and one orange focus.**
 
-Ivory is Warm Precision's default profile: make the important obvious, the complex understandable, and the next step clear. Use it as it ships, or copy it and change the tokens to make your own identity (see [Integration](design-system/profiles/ivory/INTEGRATION.md)).
+This is the kit's default profile: make the important obvious, the complex understandable, and the next step clear. Use it as it ships, or copy it and change the tokens to make your own identity (see [Integration](design-system/profiles/warm-precision/INTEGRATION.md)).
 
-The philosophy lives in [design-system/PHILOSOPHY.md](design-system/PHILOSOPHY.md), the voice in [VOICE.md](design-system/VOICE.md), document shapes in [DOCUMENTS.md](design-system/DOCUMENTS.md) and the data standard in [adapters/data.md](design-system/adapters/data.md). Exact values live in [tokens.json](design-system/profiles/ivory/tokens.json). The marked reference below is generated from those tokens; rebuild it with `python3 design-system/scripts/build.py --embed-fonts --write-brand`.
+The philosophy lives in [design-system/PHILOSOPHY.md](design-system/PHILOSOPHY.md), the voice in [VOICE.md](design-system/VOICE.md), document shapes in [DOCUMENTS.md](design-system/DOCUMENTS.md) and the data standard in [adapters/data.md](design-system/adapters/data.md). Exact values live in [tokens.json](design-system/profiles/warm-precision/tokens.json). The marked reference below is generated from those tokens; rebuild it with `python3 design-system/scripts/build.py --embed-fonts --write-brand`.
 
 ## 1. Palette and typography
 

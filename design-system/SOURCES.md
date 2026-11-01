@@ -2,7 +2,7 @@
 
 Reviewed November 2026. These are influences, not runtime dependencies. Repository defaults may change; record an installed version when integrating a vendor tool.
 
-## The Ivory profile
+## The Warm Precision profile
 
 Newsreader for one display line, Inter for headings and prose, flat surfaces, scarce accents and a warm canvas. Display lines use Newsreader's real 600 weight rather than a synthesized bold, so they render the same in every browser and export. Distribution and margins are compositional defaults; typography and strokes are destination-specific; contrast rules are measured against the actual background. Principles, profile and project context are kept separate so a project can swap the profile without touching the rest.
 
@@ -24,7 +24,7 @@ Adopt durable product context separate from visual direction, surface-specific m
 - https://github.com/cathrynlavery/diagram-design/blob/main/skills/diagram-design/references/style-guide.md
 - https://github.com/cathrynlavery/diagram-design/blob/main/skills/diagram-design/references/profiles.md
 
-Adopt semantic selection, deliberate subtraction, constrained focal emphasis, structural grid discipline, portable profile selection, accessible SVG, and fidelity ledgers. Adapt serif typography, small label defaults, hairline geometry, and tinted fills to the profile and each destination. Split accent fill/text/stroke roles because the Ivory profile's orange does not meet the vendor's all-role contrast requirement on Ivory.
+Adopt semantic selection, deliberate subtraction, constrained focal emphasis, structural grid discipline, portable profile selection, accessible SVG, and fidelity ledgers. Adapt serif typography, small label defaults, hairline geometry, and tinted fills to the profile and each destination. Split accent fill/text/stroke roles because the profile's orange does not meet the vendor's all-role contrast requirement on Ivory.
 
 ## Contrast and accessibility
 

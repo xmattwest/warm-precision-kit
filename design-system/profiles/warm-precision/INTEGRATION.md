@@ -1,4 +1,4 @@
-# Ivory profile integration
+# Warm Precision profile integration
 
 ## Token application
 
@@ -8,7 +8,7 @@ Use Newsreader 600 (optical, tracked −0.05 em) only for display moments and th
 
 ## Impeccable
 
-Place durable audience, product, and evidence facts in the project's context file. Record Ivory as the selected profile in `DESIGN.md`; keep each surface's mode and strategy in its brief. Preserve the palette and typography during refinement. The current skill's pinned-brief rule takes precedence over generic overused-font warnings.
+Place durable audience, product, and evidence facts in the project's context file. Record Warm Precision as the selected profile in `DESIGN.md`; keep each surface's mode and strategy in its brief. Preserve the palette and typography during refinement. The current skill's pinned-brief rule takes precedence over generic overused-font warnings.
 
 When the detector reports Inter as an overused font, use a narrowly scoped, documented font exception supported by the installed version. Do not disable accessibility or hierarchy checks. Familiar controls and denser layouts are appropriate in Operate mode.
 
@@ -16,7 +16,7 @@ Use critique for human judgment, audit for technical checks, and polish for reco
 
 ## Diagram Design
 
-Save a named Ivory profile outside the vendor install. Select it with the project's `.diagram-design` marker (`profile: ivory`). A profile is a complete current-schema style guide; the builder's `diagram-design-overlay.md` is mapping guidance, not a complete profile and must not be copied into the library as one.
+Save a named Warm Precision profile outside the vendor install. Select it with the project's `.diagram-design` marker (`profile: warm-precision`). A profile is a complete current-schema style guide; the builder's `diagram-design-overlay.md` is mapping guidance, not a complete profile and must not be copied into the library as one.
 
 Apply these explicit adaptations to the effective guide and relevant type rules:
 
@@ -41,4 +41,4 @@ Wait for fonts before screenshots and PDF capture. Editable SVG retains text and
 
 ## Making your own profile
 
-Copy `profiles/ivory/` to `profiles/<your-slug>/`, change `name`, `slug`, colors and roles in `tokens.json`, and point `PROFILE_DIR` in `scripts/build.py` at the new folder. `build.py --check` rejects any role pairing that fails the profile's contrast contract, so an unreadable palette fails the build instead of shipping.
+Copy `profiles/warm-precision/` to `profiles/<your-slug>/`, change `name`, `slug`, colors and roles in `tokens.json`, and point `PROFILE_DIR` in `scripts/build.py` at the new folder. `build.py --check` rejects any role pairing that fails the profile's contrast contract, so an unreadable palette fails the build instead of shipping.

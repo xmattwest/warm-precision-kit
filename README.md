@@ -12,12 +12,12 @@ That builds the browsable handbook into `handbook/`. Open `handbook/index.html`,
 
 Copy `design-system/` (and `BRAND_KIT.md` if you want the brand page) into your project. Then paste the paragraph from [`design-system/templates/AGENT_INSTRUCTIONS.md`](design-system/templates/AGENT_INSTRUCTIONS.md) into your `AGENTS.md`, `CLAUDE.md` or equivalent, so your agent reads the principles, tokens and the right adapter before it designs or writes anything.
 
-- **Colors and type** come from [`profiles/ivory/tokens.json`](design-system/profiles/ivory/tokens.json). The build turns them into CSS custom properties (`tokens.css`), a matplotlib style (`warm-precision.mplstyle`) and a contrast receipt.
+- **Colors and type** come from [`profiles/warm-precision/tokens.json`](design-system/profiles/warm-precision/tokens.json). The build turns them into CSS custom properties (`tokens.css`), a matplotlib style (`warm-precision.mplstyle`) and a contrast receipt.
 - **Charts:** `design-system/scripts/figures.py` draws accessible SVG bar, line, interval, scatter, strip, histogram, heatmap, small-multiple, band, stacked and waterfall charts, plus KPI tiles and tables, from the same tokens.
 - **Copy:** [`VOICE.md`](design-system/VOICE.md) has ten rules, three registers and a pre-publish check.
 - **Documents:** [`DOCUMENTS.md`](design-system/DOCUMENTS.md) maps the reader's goal to one of ten document types and their default shapes.
 
-To make it yours, copy `profiles/ivory/` and change the tokens. The build fails any palette whose text or essential marks miss their contrast minimums. See [the profile notes](design-system/profiles/ivory/INTEGRATION.md#making-your-own-profile).
+To make it yours, copy `profiles/warm-precision/` and change the tokens. The build fails any palette whose text or essential marks miss their contrast minimums. See [the profile notes](design-system/profiles/warm-precision/INTEGRATION.md#making-your-own-profile).
 
 ## What it does not do
 
@@ -33,4 +33,4 @@ python3 design-system/scripts/test_build.py
 
 ## Licenses
 
-Inter and Newsreader are under the SIL Open Font License. GSAP 3.15 is vendored unmodified in `design-system/vendor/gsap/` under Webflow's [standard no-charge license](https://gsap.com/standard-license).
+The kit is under the [MIT License](LICENSE). Inter and Newsreader are under the SIL Open Font License. GSAP 3.15 is vendored unmodified in `design-system/vendor/gsap/` under Webflow's [standard no-charge license](https://gsap.com/standard-license), which has its own terms.

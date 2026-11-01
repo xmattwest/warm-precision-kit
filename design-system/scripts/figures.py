@@ -4,7 +4,7 @@ Standard library only. Every color, size and format comes from the profile's tok
 so a chart built here matches the handbook, a share card and a paper figure.
 
     import json, figures
-    theme = figures.Theme(json.load(open("design-system/profiles/ivory/tokens.json")))
+    theme = figures.Theme(json.load(open("design-system/profiles/warm-precision/tokens.json")))
     svg = figures.bar_chart(theme, [("Corn", 41.2), ("Soy", 33.0)], unit="%", decimals=1, id="crops")
     html = figures.figure("Corn leads", "Share of acres, 2026, %", svg, "Source: USDA NASS")
 

@@ -18,7 +18,7 @@ import zipfile
 
 PACKAGE = Path(__file__).resolve().parents[1]
 PROJECT = PACKAGE.parent
-PROFILE_DIR = PACKAGE / "profiles/ivory"  # the selected profile; copy the folder to make your own
+PROFILE_DIR = PACKAGE / "profiles/warm-precision"  # the selected profile; copy the folder to make your own
 PROFILE = PROFILE_DIR / "tokens.json"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import figures  # noqa: E402
@@ -228,7 +228,7 @@ def page(title, body, kind="", prefix="", font_mode="embedded", styles=(), motio
 <title>{html.escape(page_title)}</title><meta name="description" content="{meta}"><meta property="og:title" content="{html.escape(page_title, quote=True)}"><meta property="og:description" content="{meta}"><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><link rel="icon" href="{prefix}favicon.svg"><link rel="stylesheet" href="{prefix}tokens.css"><link rel="stylesheet" href="{prefix}fonts.css"><link rel="stylesheet" href="{prefix}layout.css">{motion_css}{extra_styles}</head>
 <body class="{kind}"><a class="skip" href="#main">Skip to content</a>
 <header class="masthead"><a href="{prefix}index.html" class="wordmark">warm precision.<span>Design handbook</span></a><nav aria-label="Primary">{nav}</nav></header>
-<main id="main">{body}</main><footer class="site-footer"><p>Ivory profile</p><a href="{prefix}warm-precision-kit.zip">Download the kit</a><a href="{prefix}warm-precision.mplstyle" download>matplotlib style</a><a href="{prefix}handbook/SOURCES.html">Sources</a></footer>{motion_js}</body></html>'''
+<main id="main">{body}</main><footer class="site-footer"><p>Warm Precision profile</p><a href="{prefix}warm-precision-kit.zip">Download the kit</a><a href="{prefix}warm-precision.mplstyle" download>matplotlib style</a><a href="{prefix}handbook/SOURCES.html">Sources</a></footer>{motion_js}</body></html>'''
 
 
 def doc_slug(path):
@@ -523,6 +523,9 @@ def bundle(out):
         brand = PROJECT / "BRAND_KIT.md"
         if brand.exists():
             archive.write(brand, "BRAND_KIT.md")
+        license_file = PROJECT / "LICENSE"
+        if license_file.exists():
+            archive.write(license_file, "LICENSE")
 
 
 def local_pages(out, mode):
