@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10:30 · Warm Precision scene</title>
+<!-- A HyperFrames composition. In a browser, assets/player.js plays it; `scenes.py render` makes the MP4. -->
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/scene.css">
+<style>
+  #root { width: 1920px; height: 1080px; }
+  #tt-kicker { left: 120px; top: 112px; }
+  #tt-title { left: 120px; top: 156px; width: 1300px; margin: 0; font-size: var(--video-title); }
+  #tt-subtitle { left: 120px; top: 318px; margin: 0; font-size: var(--video-label); color: var(--text-secondary); }
+  #tt-clock { left: 0; top: 448px; width: 1920px; margin: 0; text-align: center; font: 600 var(--video-value)/1 var(--scene-body);
+    font-variant-numeric: tabular-nums; letter-spacing: -0.02em; color: var(--text-primary); }
+  #tt-source { left: 120px; top: 1004px; margin: 0; font-size: var(--video-caption); color: var(--text-secondary); }
+  #tt-annotation { left: 500px; top: 360px; margin: 0; }
+  #tt-annotation-value { display: block; font: 600 112px/1 var(--scene-display); letter-spacing: -0.04em; color: var(--emphasis-text);
+    font-variant-numeric: tabular-nums; }
+  #tt-annotation-label { display: block; margin-top: 12px; font-size: var(--video-label); color: var(--text-primary); }
+  .tt-axis-text { font: 400 var(--video-caption) var(--scene-body); fill: var(--text-secondary); font-variant-numeric: tabular-nums; }
+  .tt-word { display: inline-block; }
+  .tt-release { font-weight: 600; fill: var(--emphasis-text); }
+</style>
+<script src="assets/gsap.min.js"></script>
+<script src="assets/DrawSVGPlugin.min.js"></script>
+</head>
+<body>
+<div id="root" data-composition-id="ten-thirty" data-start="0" data-duration="10" data-width="1920" data-height="1080" data-fps="30">
+  <p id="tt-kicker" class="scene-text scene-kicker">Natural gas · weekly storage report</p>
+  <h1 id="tt-title" class="scene-text scene-title"><span class="tt-word">Activity</span> <span class="tt-word">jumps</span> <span class="tt-word">in</span> <span class="tt-word">the</span> <span class="tt-word">five</span> <span class="tt-word">minutes</span> <span class="tt-word">after</span> <span class="tt-word">the</span> <span class="tt-word">10:30</span> <span class="tt-word">report</span></h1>
+  <p id="tt-subtitle" class="scene-text">Trading activity per minute, as a multiple of the same minute on a day with no report</p>
+  <svg id="tt-chart" class="scene-layer" viewBox="0 0 1920 1080" aria-hidden="true">
+    <g id="tt-grid"></g>
+    <text id="tt-reference-label" class="tt-axis-text" x="1620" style="font-variant-numeric: normal">No-report day</text>
+    <g id="tt-bars"></g>
+    <line id="tt-reference" x1="200" x2="1600" stroke="var(--text-secondary)" stroke-width="3" stroke-dasharray="10 8"/>
+    <line id="tt-baseline" x1="200" x2="1600" y1="900" y2="900" stroke="var(--structure)" stroke-width="3"/>
+    <g id="tt-xlabels"></g>
+    <path id="tt-bracket" fill="none" stroke="var(--structure)" stroke-width="3"/>
+  </svg>
+  <p id="tt-annotation" class="scene-text"><span id="tt-annotation-value">4.2×</span><span id="tt-annotation-label">average in minutes 0 to 4</span></p>
+  <p id="tt-clock" class="scene-text">10:29:56</p>
+  <p id="tt-source" class="scene-text">Illustrative values for a Warm Precision scene sample, not real data.</p>
+</div>
+<script>
+  // One data module drives every mark and number in the scene.
+  const DATA = { start: "10:30", window: 5, ratios: [6.8, 5.1, 3.9, 3.0, 2.4, 2.0, 1.8, 1.7, 1.6, 1.5, 1.45, 1.4, 1.35, 1.3, 1.3,
+    1.25, 1.25, 1.2, 1.2, 1.2, 1.15, 1.15, 1.15, 1.1, 1.1, 1.1, 1.1, 1.05, 1.05, 1.05] };
+  const mean = DATA.ratios.slice(0, DATA.window).reduce((a, b) => a + b, 0) / DATA.window;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const left = 200, right = 1600, base = 900, perUnit = 68;
+  const slot = (right - left) / DATA.ratios.length, barW = slot * 0.74;
+  const y = v => base - v * perUnit;
+  const el = (tag, attrs, parent, text) => {
+    const node = document.createElementNS(NS, tag);
+    Object.entries(attrs).forEach(([k, v]) => node.setAttribute(k, v));
+    if (text) node.textContent = text;
+    parent.appendChild(node);
+    return node;
+  };
+  const grid = document.getElementById("tt-grid");
+  [2, 4, 6].forEach(v => {
+    el("line", { class: "tt-gridline", x1: left, x2: right, y1: y(v), y2: y(v), stroke: "var(--structure)", "stroke-opacity": 0.12, "stroke-width": 2 }, grid);
+    el("text", { class: "tt-axis-text tt-ylabel", x: left - 20, y: y(v) + 8, "text-anchor": "end" }, grid, v + "×");
+  });
+  const ref = document.getElementById("tt-reference");
+  ref.setAttribute("y1", y(1)); ref.setAttribute("y2", y(1));
+  document.getElementById("tt-reference-label").setAttribute("y", y(1) + 9);
+  const bars = DATA.ratios.map((v, i) => el("rect", {
+    class: "tt-bar", x: (left + i * slot + (slot - barW) / 2).toFixed(1), y: y(v).toFixed(1), width: barW.toFixed(1), height: (v * perUnit).toFixed(1),
+    fill: i < DATA.window ? "var(--series-primary)" : "var(--series-context)" }, document.getElementById("tt-bars")));
+  const xlabels = [0, 5, 10, 15, 20, 25].map(m => el("text", {
+    class: "tt-axis-text tt-xlabel", x: (left + m * slot + slot / 2).toFixed(1), y: base + 44, "text-anchor": "middle" },
+    document.getElementById("tt-xlabels"), "10:" + String(30 + m).padStart(2, "0")));
+  const bx0 = left + (slot - barW) / 2, bx1 = left + (DATA.window - 1) * slot + (slot + barW) / 2, by = y(DATA.ratios[0]) - 28;
+  document.getElementById("tt-bracket").setAttribute("d", `M${bx0} ${by + 14} V${by} H${bx1} V${by + 14}`);
+  document.getElementById("tt-annotation").style.left = (bx1 + 40) + "px";
+  document.getElementById("tt-annotation").style.top = (by - 40) + "px";
+
+  const clock = document.getElementById("tt-clock");
+  const value = document.getElementById("tt-annotation-value");
+  const ticks = { s: 56 }, count = { v: 0 }, shrink = { v: 0 };
+  const label0 = xlabels[0];
+  label0.classList.add("tt-release");
+  // GSAP can't tween var(); read the profile colors once. The clock shrinks from the value size to the caption size.
+  const token = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const px = name => parseFloat(token(name));
+  const target = { x: Number(label0.getAttribute("x")) - 960, y: base + 34 - 520, scale: px("--video-caption") / px("--video-value") };
+
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#tt-kicker", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0)
+    .fromTo(clock, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.2)
+    .fromTo(ticks, { s: 56 }, { s: 60, duration: 1.6, ease: "steps(4)",
+      onUpdate: () => { clock.textContent = ticks.s >= 60 ? "10:30:00" : "10:29:" + String(Math.round(ticks.s)); } }, 0.4)
+    .fromTo(clock, { color: token("--text-primary") }, { color: token("--emphasis-text"), duration: 0.2, ease: "none", immediateRender: false }, 2.0)
+    .fromTo(shrink, { v: 0 }, { v: 1, duration: 0.01, ease: "none", immediateRender: false,
+      onUpdate: () => { clock.textContent = shrink.v >= 1 ? DATA.start : DATA.start + ":00"; } }, 2.3)
+    .fromTo(clock, { x: 0, y: 0, scale: 1 }, { x: target.x, y: target.y, scale: target.scale, duration: 0.8, ease: "power3.inOut", immediateRender: false }, 2.3)
+    .fromTo(".tt-word", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067, ease: "power2.out" }, 2.6)
+    .fromTo("#tt-baseline", { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.5, ease: "power2.inOut" }, 2.9)
+    .fromTo(clock, { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "none", immediateRender: false }, 3.1)
+    .fromTo(label0, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 3.1)
+    .fromTo(xlabels.slice(1), { opacity: 0 }, { opacity: 1, duration: 0.25, stagger: 0.05, ease: "power2.out" }, 3.25)
+    .fromTo(".tt-gridline, .tt-ylabel", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 3.3)
+    .fromTo("#tt-subtitle, #tt-source", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 3.4)
+    .fromTo(ref, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 3.5)
+    .fromTo("#tt-reference-label", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 3.8)
+    .fromTo(bars, { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, transformOrigin: "50% 100%", duration: 0.45, stagger: 0.05, ease: "expo.out" }, 3.8)
+    .fromTo("#tt-bracket", { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.3, ease: "power2.out" }, 5.4)
+    .fromTo("#tt-annotation", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, 5.5)
+    .fromTo(count, { v: 0 }, { v: mean, duration: 1.3, ease: "power3.out",
+      onUpdate: () => { value.textContent = (count.v >= mean ? mean : count.v).toFixed(1) + "×"; } }, 5.5);
+  window.__timelines["ten-thirty"] = tl;
+</script>
+<script src="assets/player.js"></script>
+</body>
+</html>

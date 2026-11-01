@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunrise · Warm Precision scene</title>
+<!-- A HyperFrames composition: the 6-second square brand sting. -->
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/scene.css">
+<style>
+  #root { width: 1080px; height: 1080px; }
+  #dw-wordmark { left: 0; top: 650px; width: 1080px; text-align: center; font-size: var(--video-display); line-height: 1; }
+  #dw-wordmark span { display: inline-block; }
+  #dw-kicker { left: 0; top: 806px; width: 1080px; text-align: center; }
+</style>
+<script src="assets/gsap.min.js"></script>
+<script src="assets/DrawSVGPlugin.min.js"></script>
+</head>
+<body>
+<div id="root" data-composition-id="sunrise" data-start="0" data-duration="6" data-width="1080" data-height="1080" data-fps="30">
+  <svg id="dw-art" class="scene-layer" viewBox="0 0 1080 1080" aria-hidden="true">
+    <defs><clipPath id="dw-sky"><rect x="0" y="0" width="1080" height="540"/></clipPath></defs>
+    <circle id="dw-sun" cx="540" cy="540" r="168" fill="var(--emphasis)" clip-path="url(#dw-sky)"/>
+    <line id="dw-horizon" x1="120" x2="960" y1="540" y2="540" stroke="var(--structure)" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+  <p id="dw-wordmark" class="scene-text scene-wordmark" aria-label="warm precision."><span>w</span><span>a</span><span>r</span><span>m</span><span>&nbsp;</span><span>p</span><span>r</span><span>e</span><span>c</span><span>i</span><span>s</span><span>i</span><span>o</span><span>n</span><span>.</span></p>
+  <p id="dw-kicker" class="scene-text scene-kicker">Design handbook</p>
+</div>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  // The clip is on the circle's own coordinates, so the sun rises by moving its centre, not by transforms.
+  tl.fromTo("#dw-horizon", { drawSVG: "50% 50%" }, { drawSVG: "0% 100%", duration: 0.9, ease: "power2.inOut" }, 0.2)
+    .fromTo("#dw-sun", { attr: { cy: 720 } }, { attr: { cy: 540 }, duration: 1.7, ease: "power2.inOut" }, 0.7)
+    .fromTo("#dw-wordmark span", { opacity: 0, filter: "blur(4px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.05, ease: "power2.out" }, 2.0)
+    .fromTo("#dw-kicker", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 3.0);
+  window.__timelines["sunrise"] = tl;
+</script>
+<script src="assets/player.js"></script>
+</body>
+</html>

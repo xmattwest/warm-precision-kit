@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+handbook/
+.env
+.env.*
+
+# Local working pages (reviews/*.py with a render() function) render into the build but stay out of git.
+reviews/
