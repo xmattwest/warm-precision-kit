@@ -12,7 +12,7 @@ These are the corrections that come up again and again when editing technical an
 4. **Write one point where you drafted three.** If a section has three bullets, check whether one of them is the point and the other two are padding.
 5. **Vary sentence length.** Short sentences are welcome. A paragraph of identical medium-length sentences reads as generated.
 6. **No em dashes.** Use a period, comma, colon or parentheses. This applies to published prose, UI copy, captions and social posts.
-7. **Define a technical term once, in passing.** "Mechanistic interpretability, which looks inside a model for what drives its outputs." Then use the term.
+7. **Define a technical term once, in passing.** "Retrieval-augmented generation, which looks up relevant documents before answering." Then use the term.
 8. **Disclose what, not how.** For commercial work, describe capability and results. Methods, model stacks and internal tool names stay private unless you choose to publish them.
 9. **No launch theatre.** No "Introducing", no slogans as headings, no status dots or badges as decoration, no emojis, no titles on social posts.
 10. **End handoffs with the next move.** A command, a link, a question or a decision. Not a summary of what was just said.

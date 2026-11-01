@@ -2,6 +2,8 @@
 
 A style kit for research, documents, charts and software, written so both people and coding agents can follow it. It gives you one look, one voice and one way to show numbers: design tokens, a voice guide, document shapes, a data standard with SVG and matplotlib helpers, and guidance for web, slides, diagrams, motion and video.
 
+**[See it in use](https://xmattwest.github.io/warm-precision-kit/examples/)**: finished examples with the decisions behind them. **[Download the kit](https://github.com/xmattwest/warm-precision-kit/releases/latest/download/warm-precision-kit.zip)** (zip, latest release).
+
 ```sh
 python3 design-system/scripts/build.py --embed-fonts
 ```
@@ -10,12 +12,13 @@ That builds the browsable handbook into `handbook/`. Open `handbook/index.html`,
 
 ## Use it in your project
 
-Copy `design-system/` (and `BRAND_KIT.md` if you want the brand page) into your project. Then paste the paragraph from [`design-system/templates/AGENT_INSTRUCTIONS.md`](design-system/templates/AGENT_INSTRUCTIONS.md) into your `AGENTS.md`, `CLAUDE.md` or equivalent, so your agent reads the principles, tokens and the right adapter before it designs or writes anything.
+Unzip the [latest release](https://github.com/xmattwest/warm-precision-kit/releases/latest) into your project. It holds `design-system/`, `BRAND_KIT.md` and `LICENSE`; copying the same folders from a clone works too. Then paste the paragraph from [`design-system/templates/AGENT_INSTRUCTIONS.md`](design-system/templates/AGENT_INSTRUCTIONS.md) into your `AGENTS.md`, `CLAUDE.md` or equivalent, so your agent reads the principles, tokens and the right adapter before it designs or writes anything.
 
 - **Colors and type** come from [`profiles/warm-precision/tokens.json`](design-system/profiles/warm-precision/tokens.json). The build turns them into CSS custom properties (`tokens.css`), a matplotlib style (`warm-precision.mplstyle`) and a contrast receipt.
 - **Charts:** `design-system/scripts/figures.py` draws accessible SVG bar, line, interval, scatter, strip, histogram, heatmap, small-multiple, band, stacked and waterfall charts, plus KPI tiles and tables, from the same tokens.
 - **Copy:** [`VOICE.md`](design-system/VOICE.md) has ten rules, three registers and a pre-publish check.
 - **Documents:** [`DOCUMENTS.md`](design-system/DOCUMENTS.md) maps the reader's goal to one of ten document types and their default shapes.
+- **Examples:** `design-system/scripts/examples.py` builds the [example pages](https://xmattwest.github.io/warm-precision-kit/examples/): an explainer, a decision memo, a figure taken from default to finished, and one finding recomposed for four media. Each carries its decisions in the margin.
 
 To make it yours, copy `profiles/warm-precision/` and change the tokens. The build fails any palette whose text or essential marks miss their contrast minimums. See [the profile notes](design-system/profiles/warm-precision/INTEGRATION.md#making-your-own-profile).
 

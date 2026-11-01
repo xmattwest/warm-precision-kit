@@ -69,7 +69,7 @@ def home(profile, groups, documents_text):
   <p class="context">Brand and style kit</p>
   <h1>Warm Precision</h1>
   <p class="lead">One look, one voice and one way to show numbers, for research, documents and tools that have to be right and readable. Agents read the Markdown. People read these pages.</p>
-  <p class="actions"><a class="button" href="warm-precision-kit.zip" download>Download the kit</a><a href="handbook/brand-kit.html">See the brand</a></p>
+  <p class="actions"><a class="button" href="warm-precision-kit.zip" download>Download the kit</a><a href="examples/index.html">See the examples</a><a href="handbook/brand-kit.html">See the brand</a></p>
   <p class="small">Python 3.10+ · Standard library only · Works offline</p>
 </section>
 <section class="wrap section glance" aria-labelledby="glance">
@@ -239,21 +239,21 @@ def data(profile, motion=False):
 
     # The chart set added after the November survey: scatter, distribution, matrix, small multiples, bands, part-to-whole, tiles.
     scatter = figures.scatter_plot(theme,
-        [(28 + (i * 53 % 44), 30 + (i * 29 % 40) + (i * 53 % 44) * 0.4) for i in range(44)] + [(74, 86, "Session 12")],
-        id="sp-scatter", x_label="Cold-start price ($)", y_label="Final close ($)", identity=True, focus="Session 12",
-        x_min=20, x_max=100, y_min=20, y_max=100, title="Cold start vs final close")
+        [(28 + (i * 53 % 44), 30 + (i * 29 % 40) + (i * 53 % 44) * 0.4) for i in range(44)] + [(74, 86, "Store 12")],
+        id="sp-scatter", x_label="Forecast sales ($k)", y_label="Actual sales ($k)", identity=True, focus="Store 12",
+        x_min=20, x_max=100, y_min=20, y_max=100, title="Forecast vs actual sales")
     dense = figures.scatter_plot(theme, [((i * 17 % 90) + 2, ((i * 17 % 90) - 20) ** 2 * 0.06 + (i * 31 % 18)) for i in range(260)],
-        id="sp-dense", x_label="ΔV vs apo pocket (Å³)", y_label="centroid distance (Å)", dense=True, vline=20,
-        vline_label="rule threshold", x_min=0, x_max=95, y_min=0, title="Rule geometry")
-    strip = figures.strip_plot(theme, {"1×": [0.48, 0.50, 0.52, 0.47, 0.55, 0.49], "10×": [0.55, 0.60, 0.58, 0.62, 0.50, 0.57],
-                                       "100×": [0.61, 0.72, 0.65, 0.70, 0.68, 0.66]},
-                               id="sp-strip", value_label="Seller surplus split", focus="100×", decimals=2, x_min=0.4, x_max=0.8)
+        id="sp-dense", x_label="Payload size (KB)", y_label="Response time (ms)", dense=True, vline=20,
+        vline_label="size budget", x_min=0, x_max=95, y_min=0, title="Payload size and response time")
+    strip = figures.strip_plot(theme, {"Batch 1": [0.48, 0.50, 0.52, 0.47, 0.55, 0.49], "Batch 10": [0.55, 0.60, 0.58, 0.62, 0.50, 0.57],
+                                       "Batch 100": [0.61, 0.72, 0.65, 0.70, 0.68, 0.66]},
+                               id="sp-strip", value_label="Cache hit rate", focus="Batch 100", decimals=2, x_min=0.4, x_max=0.8)
     hist = figures.histogram(theme, [round(((i * 37 % 100) / 100) ** 1.8 * 6 + 0.6, 2) for i in range(160)],
                              id="sp-hist", value_label="Activity ratio (×)", reference=1, reference_label="no-report day", decimals=1, bins=14)
-    cap_rows = ["b1a", "b1b", "b2", "controls"]
-    cap_cols = [f"s{i}" for i in range(6)]
+    cap_rows = ["North", "South", "East", "Control"]
+    cap_cols = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
     cap_vals = [[0.1, 0.5, 0.9, 0.7, 0.3, 0.2], [0.0, 0.2, 0.6, 0.8, 0.4, 0.1], [0.6, 0.9, 0.8, 0.5, 0.3, 0.1], [0.0, 0.0, 0.1, 0.0, 0.0, 0.0]]
-    heatmap = figures.heatmap(theme, cap_rows, cap_cols, cap_vals, id="sp-heat", decimals=1, legend_label="max ΔV, scaled 0–1")
+    heatmap = figures.heatmap(theme, cap_rows, cap_cols, cap_vals, id="sp-heat", decimals=1, legend_label="adoption, scaled 0–1")
     diverging = figures.heatmap(theme, ["8:30", "10:30", "12:00", "Close"], ["Mon", "Tue", "Wed", "Thu", "Fri"],
         [[-0.3, 0.2, -0.1, 0.4, 0.1], [1.8, 2.1, 1.9, 2.4, 2.0], [0.1, -0.2, 0.3, -0.1, 0.0], [-0.4, -0.1, -0.6, 0.2, -0.3]],
         id="sp-div", diverging=True, decimals=1, unit="¢", legend_label="price change (¢/bu)")
@@ -297,17 +297,17 @@ def data(profile, motion=False):
 <section class="specimen" aria-labelledby="sp-relationships">
   <h2 id="sp-relationships">Relationships and distributions</h2>
   <p class="specimen-intro">One point, one row, one cell per observation. Highlight the series that carries the finding and hold the rest as context. {ILLUSTRATIVE}</p>
-  {figures.figure("Sessions settle near where they open", "Final close vs cold-start price, $; the dashed line is no change", scatter, "Source: " + ILLUSTRATIVE,
+  {figures.figure("Most stores land near their forecast", "Actual vs forecast sales, $ thousand; the dashed line is a perfect forecast", scatter, "Source: " + ILLUSTRATIVE,
                   note="Highlight one point; the rest stay as context. Add a y=x line so the reader sees the comparison.")}
-  {figures.figure("Most candidates cluster below the rule threshold", "Pocket geometry, one mark per snapshot", dense, "Source: " + ILLUSTRATIVE,
+  {figures.figure("Most requests stay under the size budget", "Payload size and response time, one mark per request", dense, "Source: " + ILLUSTRATIVE,
                   note="Hundreds of points use small, low-opacity marks and a threshold rule, never a legend.")}
-  {figures.figure("Higher stakes raise the seller’s split", "Seller surplus split by stakes multiple; the bar marks the median", strip, "Source: " + ILLUSTRATIVE)}
+  {figures.figure("Larger batches raise the cache hit rate", "Cache hit rate by batch size, six runs each; the bar marks the median", strip, "Source: " + ILLUSTRATIVE)}
   {figures.figure("Activity clusters just above the no-report day", "Count of events by activity ratio", hist, "Source: " + ILLUSTRATIVE)}
 </section>
 <section class="specimen" aria-labelledby="sp-matrix">
   <h2 id="sp-matrix">Matrices</h2>
   <p class="specimen-intro">A sequential ramp for a magnitude, a diverging ramp centered on zero for a signed value. The cell number stays readable against its fill. {ILLUSTRATIVE}</p>
-  {figures.figure("Later samples recover the pocket more often", "Capture strength by batch and sampling snapshot, scaled 0–1", heatmap, "Source: " + ILLUSTRATIVE)}
+  {figures.figure("Adoption peaks earlier in the East", "Feature adoption by region and month, scaled 0–1", heatmap, "Source: " + ILLUSTRATIVE)}
   {figures.figure("Only the 10:30 release moves price", "Mean price change by release time and weekday, ¢/bu", diverging, "Source: " + ILLUSTRATIVE,
                   note="Diverging ramp: copper below zero, slate above, parchment at no change.")}
 </section>

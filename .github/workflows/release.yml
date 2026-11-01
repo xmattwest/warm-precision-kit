@@ -1,0 +1,32 @@
+name: Release
+
+# Push a tag that matches the profile version (v1.0.0 for "version": "1.0.0") to publish the kit zip.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Tag matches the profile version
+        run: |
+          version=$(python3 -c "import json; print(json.load(open('design-system/profiles/warm-precision/tokens.json'))['version'])")
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "Tag $GITHUB_REF_NAME does not match profile version $version"; exit 1; }
+      - run: python3 design-system/scripts/test_build.py
+      - run: python3 design-system/scripts/build.py
+      - run: python3 design-system/scripts/build.py --check
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" handbook/warm-precision-kit.zip \
+            --title "Warm Precision $GITHUB_REF_NAME" \
+            --notes "The style kit: tokens, voice guide, document shapes, data standard, chart helpers and medium guidance. Unzip it into your project and see README.md. Browse the handbook and examples at https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"

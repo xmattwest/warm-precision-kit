@@ -60,8 +60,8 @@ Use Impeccable for frontend craft and Diagram Design for publication diagrams wh
 - `adapters/`: web, documents, slides, diagrams, data, motion, and scenes (GSAP in pages, HyperFrames for video).
 - `patterns/`: cross-medium information structures.
 - `templates/`: project context, artifact brief, scene brief, agent pointer, review receipt.
-- `scripts/build.py`: handbook generator and validation. `scripts/figures.py`: number formatting, SVG charts and the matplotlib style. `scripts/specimens.py`: the designed sections of handbook pages. `scripts/scenes.py`: check, snapshot and render scenes with HyperFrames.
-- `assets/`: handbook layout and the motion reference implementation.
+- `scripts/build.py`: handbook generator and validation. `scripts/figures.py`: number formatting, SVG charts and the matplotlib style. `scripts/specimens.py`: the designed sections of handbook pages. `scripts/examples.py`: the annotated example pages. `scripts/scenes.py`: check, snapshot and render scenes with HyperFrames.
+- `assets/`: handbook layout, the example-page styles and the motion reference implementation.
 - `scenes/`: one folder per HyperFrames composition, the browser player, and the in-page scene lab.
 - `vendor/gsap/`: GSAP 3.15 core and plugins, unmodified.
 - `SOURCES.md`: influences and adaptation decisions.

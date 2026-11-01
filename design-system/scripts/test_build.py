@@ -4,6 +4,7 @@ import copy
 import importlib.util
 from html.parser import HTMLParser
 from pathlib import Path
+import posixpath
 import re
 import subprocess
 import sys
@@ -175,7 +176,46 @@ class Figures(unittest.TestCase):
     def test_table_marks_numeric_columns_and_focus_row(self):
         rendered = build.figures.table(["Week", "Sales (t)"], [("W1", "10"), ("W2", "12")], numeric=(1,), focus_row=1)
         self.assertEqual(rendered.count('class="num"'), 3)  # the header cell and both body cells
-        self.assertIn('<tr class="focus"><th scope="row">W2</th>', rendered)
+        self.assertIn('<tr class="focus"><th scope="row">W2 <span class="focus-label">(latest)</span></th>', rendered)
+        self.assertNotIn("focus-label", build.figures.table(["Week"], [("W1",)]))
+
+
+class Examples(unittest.TestCase):
+    """The example pages: every rule link lands on a real heading, and every claim matches its data."""
+
+    @classmethod
+    def setUpClass(cls):
+        fonts, _ = build.font_assets(build.PROJECT / "handbook", False)  # web mode: an @import, no network
+        cls.outputs = build.artifacts(build.read_json(build.PROFILE), fonts, "web")
+
+    def test_every_fragment_link_resolves(self):
+        pages = {name: content for name, content in self.outputs.items() if name.startswith("examples/") and name.endswith(".html")}
+        self.assertEqual(sorted(pages), sorted(f"examples/{slug}" for slug in ("index.html", "explainer.html", "memo.html",
+                                                                                "figures.html", "media.html")))
+        for name, content in pages.items():
+            for href in re.findall(r'href="([^"]*#[^"]+)"', content):
+                path, fragment = href.split("#", 1)
+                target = posixpath.normpath(posixpath.join(posixpath.dirname(name), path)) if path else name
+                self.assertIn(target, self.outputs, f"{name}: {href}")
+                self.assertIn(f'id="{fragment}"', self.outputs[target], f"{name}: {href} has no matching heading")
+
+    def test_claims_are_computed_from_the_plotted_data(self):
+        s = build.examples.season()
+        prior_at_latest = [values[s["latest"]] for values in s["prior"].values()]
+        self.assertAlmostEqual(s["average"], sum(prior_at_latest) / len(prior_at_latest))
+        self.assertAlmostEqual(s["total"], s["current"][s["latest"]])
+        explainer = self.outputs["examples/explainer.html"]
+        self.assertIn(f"running {round(s['ahead'])}% ahead", explainer)
+        t = build.examples.tickets()
+        counts = dict(t["rows"])
+        self.assertIn(f"trail {t['leader'].lower()} by {counts[t['leader']] - counts[build.examples.TICKET_FOCUS]} tickets", t["title"])
+        self.assertIn(f"n = {sum(counts.values()):,}", t["subtitle"])
+
+    def test_notes_are_visible_without_script(self):
+        explainer = self.outputs["examples/explainer.html"]
+        self.assertEqual(explainer.count('class="ex-note"'), 6)
+        self.assertIn('<p class="ex-toggle" hidden>', explainer)
+        self.assertNotIn("ex-annotated notes-off", explainer)
 
 
 if __name__ == "__main__":

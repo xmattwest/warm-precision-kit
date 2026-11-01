@@ -718,14 +718,18 @@ def figure(title, subtitle, svg, source, *, note=None, wide=False):
             f'aria-label="{_esc(title)}">{svg}</div>{note_html}<figcaption>{_esc(source)}</figcaption></figure>')
 
 
-def table(columns, rows, *, numeric=(), caption=None, focus_row=None, label="Data table"):
-    """A data table. columns: header strings with units; numeric: indexes to right-align."""
+def table(columns, rows, *, numeric=(), caption=None, focus_row=None, focus_label="latest", label="Data table"):
+    """A data table. columns: header strings with units; numeric: indexes to right-align.
+
+    focus_row is marked by weight and a visible label (focus_label), never by color alone.
+    """
     numeric = set(numeric)
     num = ' class="num"'
     head = "".join(f'<th scope="col"{num if i in numeric else ""}>{_esc(c)}</th>' for i, c in enumerate(columns))
     body = []
     for r, row in enumerate(rows):
-        cells = "".join((f'<th scope="row">{_esc(v)}</th>' if i == 0 else
+        tag = f' <span class="focus-label">({_esc(focus_label)})</span>' if r == focus_row and focus_label else ""
+        cells = "".join((f'<th scope="row">{_esc(v)}{tag}</th>' if i == 0 else
                          f'<td{num if i in numeric else ""}>{_esc(v)}</td>') for i, v in enumerate(row))
         focus = ' class="focus"' if r == focus_row else ""
         body.append(f'<tr{focus}>{cells}</tr>')

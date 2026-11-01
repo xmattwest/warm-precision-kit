@@ -1,0 +1,148 @@
+/* Example pages: finished artifacts with the decisions that shaped them.
+   Loaded only on examples/*.html. Values come from tokens.css. */
+
+.ex-wrap { width: min(calc(100% - var(--space-96)), var(--web-maxWidthWide)); margin-inline: auto; }
+.ex-intro { padding-block: var(--space-64) var(--space-32); }
+.ex-intro h1 { max-width: 22ch; }
+.ex-intro .lead { max-width: 60ch; }
+.ex-meta { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-32); margin: 0; padding: 0; list-style: none; font-size: var(--web-caption); color: var(--text-secondary); }
+.ex-meta b { color: var(--text-primary); }
+.ex-section { padding-block: var(--space-48); border-top: var(--stroke-decorative) solid var(--rule-decorative); }
+.ex-section > .specimen-intro { margin-bottom: var(--space-32); }
+
+/* The method: six steps on one line, recomposed as a column on narrow screens. */
+.ex-flow { list-style: none; margin: var(--space-32) 0 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-16); counter-reset: step; }
+.ex-flow li { position: relative; padding-top: 56px; counter-increment: step; }
+.ex-flow li::before { content: counter(step); position: absolute; left: 0; top: 0; z-index: 1; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%;
+  background: var(--structure); color: var(--on-structure); font: var(--weight-heading) 1rem/1 var(--font-heading); font-variant-numeric: tabular-nums; }
+.ex-flow li::after { content: ""; position: absolute; left: 40px; right: calc(-1 * var(--space-16)); top: 19px; border-top: var(--stroke-structural) solid var(--structure); }
+.ex-flow li:last-child::after { display: none; }
+.ex-flow h3 { font-size: 1rem; margin-bottom: var(--space-8); }
+.ex-flow p { font-size: var(--web-caption); line-height: 1.5; color: var(--text-secondary); margin-bottom: var(--space-8); }
+.ex-flow a { font-size: var(--web-caption); }
+
+/* Gallery */
+.ex-gallery { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-32); }
+.ex-card { display: flex; flex-direction: column; border: var(--stroke-decorative) solid var(--rule-decorative); border-radius: var(--radius-container); overflow: hidden; }
+.ex-card-preview { height: 260px; padding: var(--space-24); overflow: hidden; border-bottom: var(--stroke-decorative) solid var(--rule-decorative); display: flex; align-items: center; justify-content: center; }
+.ex-card-preview .wp-chart { min-width: 0; max-height: 100%; width: auto; max-width: 100%; }
+.ex-card-preview.pair { gap: var(--space-16); }
+.ex-card-preview.pair > * { flex: 1 1 0; min-width: 0; }
+.ex-card-body { padding: var(--space-24); display: flex; flex-direction: column; gap: var(--space-8); }
+.ex-card-body .context { margin: 0; }
+.ex-card-body h3 { margin: 0; font-size: var(--web-h3); }
+.ex-card-body h3 a { text-decoration: none; }
+.ex-card-body h3 a:hover { text-decoration: underline; }
+.ex-card-body p:not(.context) { margin: 0; font-size: 1rem; color: var(--text-secondary); }
+
+/* Document shape strip: the type's default sections, linked into the artifact. */
+.ex-shape { list-style: none; margin: var(--space-24) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.ex-shape a { display: inline-flex; align-items: baseline; gap: var(--space-8); min-height: 40px; padding: var(--space-8) var(--space-12);
+  border: var(--stroke-decorative) solid var(--rule-decorative); border-radius: var(--radius-small); text-decoration: none; font-size: var(--web-caption); color: var(--text-primary); }
+.ex-shape a:hover { border-color: var(--structure); }
+.ex-shape b { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.ex-shape span { color: var(--text-secondary); }
+
+/* Annotated artifact: the page on the left, its decisions in the margin. */
+.ex-toggle { margin: 0 0 var(--space-16); display: flex; justify-content: flex-end; }
+.ex-toggle[hidden] { display: none; }
+.ex-row { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--space-48); }
+.ex-sheet { position: relative; padding: var(--space-32) var(--space-48); border-inline: var(--stroke-decorative) solid var(--rule-decorative); scroll-margin-top: var(--space-24); }
+.ex-row:first-child .ex-sheet { border-top: var(--stroke-decorative) solid var(--rule-decorative); border-radius: var(--radius-container) var(--radius-container) 0 0; padding-top: var(--space-48); }
+.ex-row:last-child .ex-sheet { border-bottom: var(--stroke-decorative) solid var(--rule-decorative); border-radius: 0 0 var(--radius-container) var(--radius-container); padding-bottom: var(--space-48); }
+.ex-sheet > :last-child, .ex-sheet .wp-figure:last-child { margin-bottom: 0; }
+.ex-sheet .wp-figure { margin-top: 0; }
+.ex-mark { position: absolute; left: -15px; top: var(--space-32); width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%;
+  background: var(--structure); color: var(--on-structure); font: var(--weight-heading) .8rem/1 var(--font-heading); font-variant-numeric: tabular-nums; }
+.ex-row:first-child .ex-mark { top: var(--space-48); }
+.ex-note { padding-top: var(--space-32); font-size: var(--web-caption); line-height: 1.55; }
+.ex-row:first-child .ex-note { padding-top: var(--space-48); }
+.ex-note-head { display: flex; gap: var(--space-12); align-items: baseline; margin: 0 0 var(--space-8); font-weight: var(--weight-heading); font-size: .95rem; color: var(--text-primary); }
+.ex-note-head b { flex: none; color: var(--structure); font-variant-numeric: tabular-nums; }
+.ex-note p { margin: 0 0 var(--space-8); color: var(--text-secondary); }
+.ex-note a { font-size: var(--web-caption); }
+.ex-annotated.notes-off .ex-row { grid-template-columns: minmax(0, 1fr); max-width: 900px; margin-inline: auto; }
+.ex-annotated.notes-off .ex-note, .ex-annotated.notes-off .ex-mark { display: none; }
+
+/* Artifact typography: a page inside the page. */
+.ex-title { font-size: var(--web-h1); letter-spacing: -.025em; line-height: 1.15; max-width: 24ch; margin-bottom: var(--space-16); text-wrap: balance; }
+.ex-sheet h3 { font-size: var(--web-h2); line-height: 1.3; margin-bottom: var(--space-16); }
+.ex-sheet .lead { margin-bottom: 0; }
+.ex-sheet .kpi-grid { margin-bottom: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ex-sheet ul, .ex-sheet ol { padding-left: 1.25em; }
+.ex-sheet li { margin-bottom: var(--space-8); }
+.ex-sheet details { margin: 0; }
+.ex-sheet .table-scroll { margin-bottom: 0; }
+.ex-answer { font-size: var(--web-lede); line-height: 1.55; max-width: 60ch; }
+.ex-answer strong { font-weight: var(--weight-heading); }
+
+/* From default to finished: one chart, six edits. */
+.ex-stages { list-style: none; margin: 0; padding: 0; counter-reset: stage; }
+.ex-stage { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: var(--space-48); padding-block: var(--space-48); border-top: var(--stroke-decorative) solid var(--rule-decorative); counter-increment: stage; }
+.ex-stage:first-child { border-top: 0; padding-top: 0; }
+.ex-stage-step { margin: 0 0 var(--space-8); }
+.ex-stage h3 { margin-bottom: var(--space-12); }
+.ex-stage-text p { font-size: 1rem; color: var(--text-secondary); margin-bottom: var(--space-12); }
+.ex-stage-text p.ex-rule { font-size: var(--web-caption); }
+.ex-draft-title { font-weight: var(--weight-heading); font-size: var(--chart-title); margin: 0 0 var(--space-16); }
+.ex-stage .wp-figure { margin: 0; }
+.ex-grayscale { filter: grayscale(1); }
+
+/* One finding, four sizes: wide, two side by side, wide. */
+.ex-media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-48) var(--space-32); align-items: start; }
+.ex-media figure { margin: 0; }
+.ex-media .ex-wide { grid-column: 1 / -1; }
+.ex-media-label { display: flex; justify-content: space-between; gap: var(--space-16); margin: 0 0 var(--space-12); font-size: var(--web-caption); }
+.ex-media-label b { font-weight: var(--weight-heading); }
+.ex-media-label span { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.ex-canvas { border: var(--stroke-decorative) solid var(--rule-decorative); border-radius: var(--radius-small); overflow: hidden; }
+.ex-canvas svg { display: block; width: 100%; height: auto; }
+.ex-canvas.web { padding: var(--space-32) var(--space-48); }
+.ex-canvas.web .wp-figure { margin: 0 auto; max-width: 720px; }
+.ex-canvas.web svg.wp-chart { width: 720px; max-width: none; }
+.ex-phone { width: 390px; max-width: 100%; margin-inline: auto; padding: var(--space-24) 15px; border: var(--stroke-structural) solid var(--structure); border-radius: 28px; }
+.ex-phone .wp-chart { min-width: 0; }
+.ex-phone .wp-figure { margin: 0; }
+.ex-phone .wp-figure-title { font-size: 1.1rem; }
+.ex-media figcaption.ex-why { margin-top: var(--space-12); font-size: var(--web-caption); line-height: 1.55; color: var(--text-secondary); }
+
+.ex-next { display: flex; flex-wrap: wrap; gap: var(--space-16); }
+.examples .site-footer { width: min(calc(100% - var(--space-96)), var(--web-maxWidthWide)); }
+
+@media (max-width: 1000px) {
+  .ex-flow { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--space-32); }
+  .ex-flow li:nth-child(3)::after { display: none; }
+  .ex-row { grid-template-columns: minmax(0, 1fr) 240px; gap: var(--space-32); }
+  .ex-stage { grid-template-columns: 240px minmax(0, 1fr); gap: var(--space-32); }
+}
+@media (max-width: 900px) {
+  .ex-wrap, .examples .site-footer { width: calc(100% - var(--space-48)); }
+  .ex-gallery, .ex-media { grid-template-columns: minmax(0, 1fr); }
+  .ex-canvas.web { padding: var(--space-24); }
+  .ex-flow { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .ex-flow li { padding: 0 0 var(--space-24) 60px; min-height: 64px; }
+  .ex-flow li::after, .ex-flow li:nth-child(3)::after { display: block; left: 19px; right: auto; top: 40px; bottom: 0; border-top: 0; border-left: var(--stroke-structural) solid var(--structure); }
+  .ex-flow li:last-child::after { display: none; }
+  .ex-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .ex-note { padding: var(--space-16) var(--space-24) var(--space-24); margin-bottom: 0; background: var(--well); border-inline: var(--stroke-decorative) solid var(--rule-decorative); }
+  .ex-row:first-child .ex-note { padding-top: var(--space-16); }
+  .ex-row:last-child .ex-sheet { border-radius: 0; }
+  .ex-row:last-child .ex-note { border-bottom: var(--stroke-decorative) solid var(--rule-decorative); border-radius: 0 0 var(--radius-container) var(--radius-container); }
+  .ex-annotated.notes-off .ex-row:last-child .ex-sheet { border-radius: 0 0 var(--radius-container) var(--radius-container); }
+  .ex-mark { display: none; }
+  .ex-stage { grid-template-columns: minmax(0, 1fr); gap: var(--space-24); }
+}
+@media (max-width: 600px) {
+  .ex-sheet .kpi-grid { grid-template-columns: minmax(0, 1fr); }
+  .ex-sheet { padding: var(--space-24) var(--space-20); }
+  .ex-row:first-child .ex-sheet { padding-top: var(--space-32); }
+  .ex-row:last-child .ex-sheet { padding-bottom: var(--space-32); }
+  .ex-note { padding-inline: var(--space-20); }
+  .ex-title { font-size: 1.75rem; }
+  .ex-intro { padding-block: var(--space-48) var(--space-24); }
+  .ex-card-preview { height: 200px; }
+}
+@media print {
+  .ex-toggle { display: none; }
+  .ex-row, .ex-stage { break-inside: avoid; }
+}

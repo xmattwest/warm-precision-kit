@@ -23,6 +23,7 @@ PROFILE = PROFILE_DIR / "tokens.json"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import figures  # noqa: E402
 import specimens  # noqa: E402
+import examples  # noqa: E402
 
 FONT_URL = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap"
 DOCS = [PACKAGE / "README.md", PACKAGE / "PHILOSOPHY.md", PACKAGE / "VOICE.md", PACKAGE / "DOCUMENTS.md",
@@ -210,7 +211,7 @@ def font_assets(out, embed):
                  "note": "Public Google Fonts, embedded for offline viewing. See font-license links on the handbook."}
 
 
-NAV = (("Brand", "handbook/brand-kit.html"), ("Voice", "handbook/VOICE.html"),
+NAV = (("Examples", "examples/index.html"), ("Brand", "handbook/brand-kit.html"), ("Voice", "handbook/VOICE.html"),
        ("Documents", "handbook/DOCUMENTS.html"), ("Data", "handbook/adapters-data.html"))
 DESCRIPTION = "The Warm Precision brand and style kit: colors, type, voice, document shapes and data presentation."
 
@@ -423,7 +424,18 @@ def artifacts(profile, fonts, mode):
         groups[group].append((LABELS.get(key, title), f"handbook/{slug}"))
     choosing = (PACKAGE / "DOCUMENTS.md").read_text(encoding="utf-8")
     outputs["index.html"] = page("Warm Precision", specimens.home(profile, groups, choosing), font_mode=mode)
+    outputs.update(example_outputs(profile, choosing, mode))
     outputs.update(scene_outputs(profile, fonts))
+    return outputs
+
+
+def example_outputs(profile, documents_text, mode):
+    """Finished artifacts with their decision notes, under examples/."""
+    outputs = {"examples.css": (PACKAGE / "assets/examples.css").read_text(encoding="utf-8"),
+               "examples.js": (PACKAGE / "assets/examples.js").read_text(encoding="utf-8")}
+    for slug, (title, body, description) in examples.pages(profile, documents_text).items():
+        outputs[f"examples/{slug}"] = page(title, body, kind="examples", prefix="../", font_mode=mode, styles=("examples.css",),
+                                           scripts=("examples.js",), description=description)
     return outputs
 
 
@@ -601,6 +613,7 @@ def main():
             try:
                 importlib.reload(figures)
                 importlib.reload(specimens)
+                importlib.reload(examples)
                 run(args, read_json(PROFILE))
             except (AssertionError, ValueError, OSError, SyntaxError, KeyError) as exc:
                 print(f"Build/validation failed: {exc}", file=sys.stderr)

@@ -60,7 +60,7 @@ tbody th { font-weight: var(--weight-body); }
 .wp-table { min-width: 560px; }
 .wp-table .num { text-align: right; white-space: nowrap; }
 .wp-table tr.focus th, .wp-table tr.focus td { font-weight: var(--weight-heading); color: var(--text-primary); }
-.wp-table tr.focus th::after { content: " (latest)"; font-weight: var(--weight-body); color: var(--text-secondary); }
+.wp-table .focus-label { font-weight: var(--weight-body); color: var(--text-secondary); }
 
 /* Reference documents */
 .document { max-width: 760px; padding-block: var(--space-64); overflow-wrap: anywhere; }
